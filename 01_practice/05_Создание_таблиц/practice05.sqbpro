@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="practice05.db" readonly="0" foreign_keys="0" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1413"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="documents" custom_title="0" dock_id="1" table="4,9:maindocuments"/><dock_state state="000000ff00000000fd00000001000000020000000000000000fc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000ffffffff0000012e00ffffff000000000000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1*">CREATE TABLE category (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT UNIQUE NOT NULL
+);</sql><sql name="SQL 2*">PRAGMA foreign_keys = ON;
+
+CREATE TABLE product (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    price REAL CHECK (price &gt; 0),
+    category_id INTEGER REFERENCES category(id),
+    created TEXT DEFAULT (date('now'))
+);</sql><sql name="SQL 3*">INSERT INTO category (name) VALUES ('Еда'), ('Быт');
+
+INSERT INTO product (name, price, category_id) VALUES
+('Хлеб', 40.0, 1),
+('Мыло', 80.0, 2);</sql><sql name="SQL 4*">INSERT INTO product (name, price) VALUES ('Тест', -50);</sql><sql name="SQL 5*">CREATE TABLE supplier (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    phone TEXT UNIQUE,
+    email TEXT UNIQUE
+);</sql><sql name="SQL 6*">CREATE TABLE shipment (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    product_id INTEGER REFERENCES product(id),
+    supplier_id INTEGER REFERENCES supplier(id),
+    quantity INTEGER CHECK (quantity &gt; 0),
+    date TEXT DEFAULT CURRENT_DATE
+);В</sql><sql name="SQL 7*">CREATE TABLE product_supplier_link (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    product_id INTEGER REFERENCES product(id),
+    supplier_id INTEGER REFERENCES supplier(id),
+    UNIQUE (product_id, supplier_id)
+);</sql><current_tab id="6"/></tab_sql></sqlb_project>

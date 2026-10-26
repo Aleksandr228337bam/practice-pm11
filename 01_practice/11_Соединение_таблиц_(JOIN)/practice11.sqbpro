@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="practice11.db" readonly="0" foreign_keys="0" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1413"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="categories" custom_title="0" dock_id="1" table="4,10:maincategories"/><dock_state state="000000ff00000000fd00000001000000020000000000000000fc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000ffffffff0000012e00ffffff000000000000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1*">SELECT p.title, c.name AS category
+FROM product p
+INNER JOIN categories c ON p.category_id = c.id;</sql><sql name="SQL 2*">SELECT c.name AS category, p.title AS product
+FROM categories c
+LEFT JOIN product p ON c.id = p.category_id;</sql><sql name="SQL 3*">SELECT p.title
+FROM product p
+LEFT JOIN categories c ON p.category_id = c.id
+WHERE c.id IS NULL;</sql><sql name="SQL 4*">SELECT c.name, COUNT(p.id) AS product_count
+FROM categories c
+LEFT JOIN product p ON c.id = p.category_id
+GROUP BY c.id, c.name;</sql><sql name="SQL 5*">SELECT p.title, c.name AS category
+FROM product p
+FULL JOIN categories c ON p.category_id = c.id;</sql><sql name="SQL 6*">SELECT c.name
+FROM categories c
+LEFT JOIN product p ON c.id = p.category_id
+WHERE p.id IS NULL;</sql><sql name="SQL 7*">SELECT p.title AS product, c.name AS category, s.name AS supplier
+FROM product p
+JOIN categories c ON p.category_id = c.id
+JOIN supplier s ON p.supplier_id = s.id;</sql><sql name="SQL 8*">CREATE TABLE IF NOT EXISTS supplier (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL
+);
+
+INSERT INTO supplier (name) VALUES ('ООО &quot;Поставщик 1&quot;'), ('ИП &quot;Продторг&quot;');</sql><sql name="SQL 9*">ALTER TABLE product ADD COLUMN supplier_id INTEGER;</sql><sql name="SQL 10*">UPDATE product SET supplier_id = 1 WHERE id = 1;</sql><sql name="SQL 11*">SELECT p.title AS product, c.name AS category, s.name AS supplier
+FROM product p
+JOIN categories c ON p.category_id = c.id
+JOIN supplier s ON p.supplier_id = s.id;</sql><sql name="SQL 12*">SELECT p.title, c.name AS category
+FROM product p
+JOIN categories c ON p.category_id = c.id
+WHERE c.name LIKE 'Е%';В</sql><current_tab id="11"/></tab_sql></sqlb_project>

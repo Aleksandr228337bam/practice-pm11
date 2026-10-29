@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/home/user/Рабочий стол/practice13.db" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><current_tab id="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="113"/><column_width id="3" width="1620"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="categories"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="categories" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk=""><sort/><column_widths/><filter_values/><display_formats/><hidden_columns/><plot_y_axes/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE product_new (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT,
+    price REAL CHECK (price &gt;= 0)
+);</sql><sql name="SQL 2">CREATE TABLE product_new2 (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT UNIQUE,
+    price REAL
+);</sql><sql name="SQL 3">SELECT title, price,
+CASE 
+    WHEN price &gt; 100 THEN 'дорого'
+    ELSE 'дёшево'
+END AS price_label
+FROM product;</sql><sql name="SQL 4">SELECT title, COALESCE(category_id, 0) AS cat_id 
+FROM product;</sql><sql name="SQL 5">SELECT title, 1000 / NULLIF(price, 0) AS ratio 
+FROM product;</sql><sql name="SQL 6">CREATE TABLE product_new3 (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT,
+    price REAL DEFAULT 0
+);</sql><sql name="SQL 7">SELECT title, price,
+CASE 
+    WHEN price &lt;= 50 THEN 'дёшево'
+    WHEN price BETWEEN 50 AND 100 THEN 'средне'
+    ELSE 'дорого'
+END AS price_category
+FROM product;</sql><sql name="SQL 8">SELECT title, COALESCE(price, 0) + COALESCE(discount, 0) AS total_sum 
+FROM product;</sql><sql name="SQL 9">alter table product add column discount real;</sql><current_tab id="7"/></tab_sql></sqlb_project>
